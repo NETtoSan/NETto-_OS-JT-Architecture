@@ -1,7 +1,7 @@
 {
-    "token":"Enter your token here",
-    "prefix":"|",
-    "version": "1.0",
-    "mute": "on",
-    "startup": false
+  "token": "Enter your token here",
+  "prefix": "|",
+  "version": "1.0",
+  "mute": "on",
+  "startup": false
 }
