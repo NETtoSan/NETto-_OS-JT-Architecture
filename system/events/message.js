@@ -61,6 +61,7 @@ module.exports = class {
         const uperm = await message.member.permissions.has(perm)
         console.log(uperm)
         if(uperm) {
+            if(perm == "OWNER") return message.channel.send(new discord.MessageEmbed().setTitle("Access denied!").setDescription(`This program required role of ${perm}`).setColor(0xFF3333))
             console.log("THIS 3 RUN")
             return cmd.run(message,args,bot)
         }
