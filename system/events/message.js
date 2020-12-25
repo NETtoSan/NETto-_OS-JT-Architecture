@@ -42,16 +42,19 @@ module.exports = class {
     if (message.guild && !message.member)
       await message.guild.fetchMember(message.author);
 
-    const bot = this.bot;
-    //permission exec
-    let perm = cmd.conf.permissions
+
+    //Permission shit goes here
+        const bot = this.bot
+        let perm = cmd.conf.permissions
+        let lw = await message.client.fetchApplication().then(app=>app.owner.id)
         console.log(perm)
+        //Logic shits
         if(!perm) return message.channel.send(new discord.MessageEmbed().setTitle("Permission error on JS").setDescription("Check ./system/base and ./system/executables").setColor(0xFF3333))
         if(perm == "default") {
             console.log("THIS 1 RUN")
             return cmd.run(message,args,bot)
         }
-        if(perm == "OWNER" && message.author.id == "419767571571539979") {
+        if(perm == "OWNER" && message.author.id == lw) {
             console.log("THIS 2 RUN")
             return cmd.run(message,args,bot)
         }
