@@ -35,6 +35,7 @@ class help extends Command {
             .addField("Usage", cmd.help.usage)
             .addField("aliases", cmd.conf.aliases)
             .addField("Category", cmd.help.category)
+            .addField("Permissions" , cmd.conf.permissions)
             .setColor(0x33ffec)
         );
       } else
