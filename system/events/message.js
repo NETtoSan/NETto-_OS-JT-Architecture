@@ -43,6 +43,25 @@ module.exports = class {
       await message.guild.fetchMember(message.author);
 
     const bot = this.bot;
-    cmd.run(message, args, bot);
+    //permission exec
+    let perm = cmd.conf.permissions
+        console.log(perm)
+        if(!perm) return message.channel.send(new discord.MessageEmbed().setTitle("Permission error on JS").setDescription("Check ./system/base and ./system/executables").setColor(0xFF3333))
+        if(perm == "default") {
+            console.log("THIS 1 RUN")
+            return cmd.run(message,args,bot)
+        }
+        if(perm == "OWNER" && message.author.id == "419767571571539979") {
+            console.log("THIS 2 RUN")
+            return cmd.run(message,args,bot)
+        }
+        const uperm = await message.member.permissions.has(perm)
+        console.log(uperm)
+        if(uperm) {
+            console.log("THIS 3 RUN")
+            return cmd.run(message,args,bot)
+        }
+        else return message.channel.send(new discord.MessageEmbed().setTitle("Access denied!").setDescription(`This program required role of ${perm}`))
+        
   }
 };
