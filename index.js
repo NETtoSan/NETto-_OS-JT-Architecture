@@ -1,7 +1,7 @@
 const { Client, Collection } = require("discord.js");
 const klaw = require("klaw");
 const path = require("path");
-const fs = require("fs");
+const { readdirSync } = require("fs");
 
 class NETTO_OS extends Client {
   constructor(options) {
@@ -42,7 +42,7 @@ const init = async () => {
     if (resp) console.error(resp);
   });
 
-  const eventFiles = await fs.readdirSync("./system/events");
+  const eventFiles = await readdirSync("./system/events");
   console.log(`Loaded ${eventFiles.length} event files `, "log");
   eventFiles.forEach((file) => {
     const eventName = file.split(".")[0];
