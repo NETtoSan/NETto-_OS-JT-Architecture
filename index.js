@@ -3,7 +3,7 @@ const klaw = require("klaw");
 const path = require("path");
 const fs = require("fs");
 
-class NETOS extends Client {
+class NETTO_OS extends Client {
   constructor(options) {
     super(options);
 
@@ -32,7 +32,7 @@ class NETOS extends Client {
   }
 }
 
-const bot = new NETOS();
+const bot = new NETTO_OS();
 
 const init = async () => {
   klaw("./system/executables").on("data", (item) => {
