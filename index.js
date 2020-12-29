@@ -3,7 +3,7 @@ const klaw = require("klaw");
 const path = require("path");
 const { readdirSync } = require("fs");
 
-class NETTO_OS extends Client {
+class NETto_OS extends Client {
   constructor(options) {
     super(options);
 
@@ -32,7 +32,7 @@ class NETTO_OS extends Client {
   }
 }
 
-const bot = new NETTO_OS();
+const bot = new NETto_OS();
 
 function init() {
   klaw("./system/executables").on("data", (item) => {
