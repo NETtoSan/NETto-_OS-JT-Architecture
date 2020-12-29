@@ -42,7 +42,7 @@ const init = async () => {
     if (resp) console.error(resp);
   });
 
-  const eventFiles = await readdirSync("./system/events");
+  const eventFiles = readdirSync("./system/events");
   console.log(`Loaded ${eventFiles.length} event files `, "log");
   eventFiles.forEach((file) => {
     const eventName = file.split(".")[0];
