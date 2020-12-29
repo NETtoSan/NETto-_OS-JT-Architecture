@@ -1,5 +1,4 @@
 const { Client, Collection } = require("discord.js");
-const discord = require("discord.js");
 const klaw = require("klaw");
 const path = require("path");
 const fs = require("fs");
