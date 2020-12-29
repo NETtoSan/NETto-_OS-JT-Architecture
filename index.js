@@ -34,7 +34,7 @@ class NETTO_OS extends Client {
 
 const bot = new NETTO_OS();
 
-const init = async () => {
+function init() {
   klaw("./system/executables").on("data", (item) => {
     const pgFile = path.parse(item.path);
     if (!pgFile.ext || pgFile.ext !== ".js") return;
@@ -52,7 +52,7 @@ const init = async () => {
     bot.on(eventName, (...args) => evt.run(...args));
     delete require.cache[require.resolve(`./system/events/${file}`)];
   });
-};
+}
 
 init();
 
