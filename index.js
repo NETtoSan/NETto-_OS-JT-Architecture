@@ -1,10 +1,9 @@
 const { Client, Collection } = require("discord.js");
-const discord = require("discord.js");
 const klaw = require("klaw");
 const path = require("path");
-const fs = require("fs");
+const { readdirSync } = require("fs");
 
-class NETOS extends Client {
+class NETto_OS extends Client {
   constructor(options) {
     super(options);
 
@@ -33,9 +32,9 @@ class NETOS extends Client {
   }
 }
 
-const bot = new NETOS();
+const bot = new NETto_OS();
 
-const init = async () => {
+function init() {
   klaw("./system/executables").on("data", (item) => {
     const pgFile = path.parse(item.path);
     if (!pgFile.ext || pgFile.ext !== ".js") return;
@@ -43,7 +42,7 @@ const init = async () => {
     if (resp) console.error(resp);
   });
 
-  const eventFiles = await fs.readdirSync("./system/events");
+  const eventFiles = readdirSync("./system/events");
   console.log(`Loaded ${eventFiles.length} event files `, "log");
   eventFiles.forEach((file) => {
     const eventName = file.split(".")[0];
@@ -53,7 +52,7 @@ const init = async () => {
     bot.on(eventName, (...args) => evt.run(...args));
     delete require.cache[require.resolve(`./system/events/${file}`)];
   });
-};
+}
 
 init();
 
