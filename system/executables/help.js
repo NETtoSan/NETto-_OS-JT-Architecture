@@ -15,15 +15,25 @@ class help extends Command {
       const progS = bot.programs.map((program) => program.help.name);
       const sysS = bot.programs.map((program) => program.help.category);
 
-      const embed = new discord.MessageEmbed()
-        .setTitle(bot.user.username)
-        .setDescription(
-          "How to use this bot properly \n ⚠️ This bot is using JT Architecture"
-        )
-        .addField("Programs", progS.join("\n"), true)
-        .setColor(0x33ffec);
+        const help = {}
+        const files = {}
+        bot.programs.forEach((command) => {
+            const cat = command.help.category;
+            if (!help.hasOwnProperty(cat)) help[cat] = []
+            help[cat].push(command)
+        })
+        const embed = new discord.MessageEmbed().setTitle(bot.user.username).setDescription("How to use this bot properly \nUse help [command] to view more details of that command")
+        for (const category in help) {
+            for (const command of help[category]) {
+                const cat = category
+                if (!files.hasOwnProperty(cat)) files[cat] = []
+                files[cat].push(command.help.name)
+            }
+            embed.addField(category, files[category].join(" , "))
+        }    
 
-      return message.channel.send(embed);
+        embed.setColor(0x33FFEC)
+        return message.channel.send(embed)
     } else {
       let cmd = args[0];
       if (this.bot.programs.has(cmd)) {
