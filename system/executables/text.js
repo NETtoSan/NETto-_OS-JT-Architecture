@@ -32,7 +32,8 @@ class text extends Command{
 let tempcache = []
 let instance = []
 let userstop = []
-newfx(message,args,bot,data){
+
+async function newfx(message,args,bot,data){
   //Text function goes here
   /*
   instance[message.author.id] = "0"; userstop[message.author.id] = "cont"
