@@ -10,7 +10,7 @@ module.exports = class {
       return message.channel.send(
         new discord.MessageEmbed()
           .setTitle(this.bot.user.username)
-          .setDescription(`My prefix is ${this.bot.config.prefix}\nA development bot by NETto. Get a repository [here](https://github.com/NETtoSan/NETto-_OS-JT-Architecture)`)
+          .setDescription(`My prefix is ${this.bot.config.prefix}\nA development bot by NETto. AKA. A development platform for NETSU Cloud\nGet a repository [here](https://github.com/NETtoSan/NETto-_OS-JT-Architecture)`)
           .setColor(0x33ffec)
       );
 
