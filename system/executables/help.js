@@ -6,7 +6,7 @@ class help extends Command {
       name: "help",
       description: "Helps a user know how to use a bot",
       aliases: ["h"],
-      usage: "help <command>",
+      usage: "help [command]",
       category: "System",
     });
   }
@@ -30,9 +30,10 @@ class help extends Command {
                 files[cat].push(command.help.name)
             }
             embed.addField(category, files[category].join(" , "))
-        }    
+        }
 
         embed.setColor(0x33FFEC)
+        embed.setFooter("Syntaxes: [] = String OR optional options\n<> = Required subcommand\n< / > = Multiple subcommand choices\n<condition? > = If this subcommand, then...")
         return message.channel.send(embed)
     } else {
       let cmd = args[0];
