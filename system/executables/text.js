@@ -16,14 +16,16 @@ class text extends Command{
     if(!args[0]) return message.channel.send(new discord.MessageEmbed().setTitle("This function is currently in development").setDescription("Please come back later!").setColor(0x33FFEC))
     if(args[0] == "new"){
       var data = "new text"
-      newfx(message,args,bot,data)
+      var datadir = "New file"
+      newfx(message,args,bot,data,datadir)
     }
-    if(args[0]){
+    else if(args[0]){
       //cut only dir
       let titlemsg = message.content.slice(6)
       let fiS = fs.readFile(`${defaultfile}/${titlemsg}`,"utf8",(err,data)=>{
         if(err) return message.channel.send(new discord.MessageEmbed().setTitle(`${titlemsg} doesnt exist`).setDescription("Please try again").setColor(0xFF3333))
-        newfx(message,args,bot,data)
+        datadir = titlemsg
+        newfx(message,args,bot,data,datadir)
       })
     }
   }
@@ -33,7 +35,7 @@ let tempcache = []
 let instance = []
 let userstop = []
 
-async function newfx(message,args,bot,data){
+async function newfx(message,args,bot,data,datadir){
   //Text function goes here
   /*
   instance[message.author.id] = "0"; userstop[message.author.id] = "cont"
@@ -42,8 +44,8 @@ async function newfx(message,args,bot,data){
     let filter = m=>m.author.id == message.author.id && !message.author.bot
     let collector = new discord.MessageCollector(message.channel,filter)
 
-    instance[message.author.id] == "active"
-
+    instance[message.author.id] = "active"
+    message.channel.send(new discord.MessageEmbed().setTitle(`${datadir}`).setDescription(`${data}`).setColor(0x33FFEC))
     collector.on("collect",(message,col)=>{
       args = message.content.split(" ")
       if(message.content){
@@ -69,3 +71,6 @@ async function newfx(message,args,bot,data){
     return message.channel.send(new discord.MessageEmbed().setTitle("Your text editor instance is already on!").setDescription("Use that instance instead").setColor(0x33FFEC))
   }
 }
+
+
+module.exports= text
