@@ -10,7 +10,7 @@ module.exports = class {
       return message.channel.send(
         new discord.MessageEmbed()
           .setTitle(this.bot.user.username)
-          .setDescription(`My prefix is ${this.bot.config.prefix}`)
+          .setDescription(`My prefix is ${this.bot.config.prefix}\nA development bot by NETto. Get a repository [here](https://github.com/NETtoSan/NETto-_OS-JT-Architecture)`)
           .setColor(0x33ffec)
       );
 
@@ -57,7 +57,7 @@ module.exports = class {
             return cmd.run(message,args,bot)
         }
         else return message.channel.send(new discord.MessageEmbed().setTitle("Access denied!").setDescription(`This program required role of ${perm}`))
-        
+
   }
 };
 

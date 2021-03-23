@@ -1,6 +1,7 @@
 const Command = require('../base/programs')
 const discord = require('discord.js')
 const fs = require('fs')
+let defaultfile = "./text"
 class text extends Command{
   constructor(bot) {
     super(bot, {
@@ -12,7 +13,6 @@ class text extends Command{
     });
   }
   async run (message,args,bot){
-    let defaultfile = "./text"
     if(!args[0]) return message.channel.send(new discord.MessageEmbed().setTitle("This function is currently in development").setDescription("Please come back later!").setColor(0x33FFEC))
     if(args[0] == "new"){
       var data = "new text"
@@ -45,10 +45,13 @@ async function newfx(message,args,bot,data,datadir){
     let collector = new discord.MessageCollector(message.channel,filter)
 
     instance[message.author.id] = "active"
+    tempcache[message.author.id] = data
     message.channel.send(new discord.MessageEmbed().setTitle(`${datadir}`).setDescription(`${data}`).setColor(0x33FFEC))
     collector.on("collect",(message,col)=>{
       args = message.content.split(" ")
       if(message.content){
+        console.log(data)
+        console.log(tempcache[message.author.id])
         if(message.content.startsWith(":st")){
           if(!userstop[message.author.id] || userstop[message.author.id] == "cont"){
             userstop[message.author.id] = "stop"
@@ -58,13 +61,49 @@ async function newfx(message,args,bot,data,datadir){
             userstop[message.author.id] = "cont"
             message.channel.send(new discord.MessageEmbed().setTitle("Started collecting texts!").setDescription("Run :st again to stop text editor"))
           }
-        }
 
+          return
+        }
+        if(message.content.startsWith(":q")){
+          if(message.content.startsWith(":q!")){
+            return collector.stop()
+          }
+          if(datadir.toLowerCase() == "new file" && tempcache[message.author.id].toLowerCase == "new text"){
+            message.channel.send(new discord.MessageEmbed().setTitle("Enter a file name to save").setColor(0x33FFEC))
+          }
+          else if(datadir){
+            if(data != tempcache[message.author.id]){
+              message.channel.send(new discord.MessageEmbed().setTitle("There are changes to the file").setDescription("Do you wish to save it?").setColor(0x33FFEC))
+            }
+            else{
+              return collector.stop()
+            }
+          }
+          else{
+            return collector.stop()
+          }
+          return
+        }
+        if(message.content.startsWith(":sv")){
+          if(!args[1] && datadir.toLowerCase() == "new file") return message.channel.send(new discord.MessageEmbed().setTitle("Enter a file directory").setColor(0xFF3333))
+          if(args[1]) {
+            // statement
+            return;
+          }
+          if(datadir){
+            data = tempcache[message.author.id]
+            return sv(message,args,bot,datadir,tempcache)
+          }
+        }
         if(!userstop[message.author.id] || userstop[message.author.id] == "cont"){
           tempcache[message.author.id] = message.content
           message.channel.send(new discord.MessageEmbed().setTitle(`${message.author.username}`).setDescription(`${tempcache[message.author.id]}`))
         }
       }
+    })
+    collector.on("end",()=>{
+      instance[message.author.id] = "end"
+      return message.channel.send(new discord.MessageEmbed().setTitle("Exit text editor!").setDescription("Good bye").setColor(0x33FFEC))
     })
   }
   else{
@@ -72,5 +111,11 @@ async function newfx(message,args,bot,data,datadir){
   }
 }
 
+async function sv(message,args,bot,datadir,tempcache){
+  fs.writeFile(`${defaultfile}/${datadir}`,tempcache[message.author.id],(cache,err)=>{
+    if(err) return console.log(err)
+    return message.channel.send(new discord.MessageEmbed().setTitle("Saved!").setColor(0x33FFEC))
+  })
+}
 
 module.exports= text
