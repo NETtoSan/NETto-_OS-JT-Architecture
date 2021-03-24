@@ -46,8 +46,10 @@ async function newfx(message,args,bot,data,datadir){
     let filter = m=>m.author.id == message.author.id && !message.author.bot
     let collector = new discord.MessageCollector(message.channel,filter)
 
+    //data init
     instance[message.author.id] = "active"
     tempcache[message.author.id] = data
+    //send a template
     message.channel.send(new discord.MessageEmbed().setTitle(`${datadir}`).setDescription(`${data}`).setColor(0x33FFEC))
     collector.on("collect",(message,col)=>{
       args = message.content.split(" ")
@@ -75,7 +77,7 @@ async function newfx(message,args,bot,data,datadir){
           }
           else if(datadir){
             if(data != tempcache[message.author.id]){
-              message.channel.send(new discord.MessageEmbed().setTitle("There are changes to the file").setDescription("Do you wish to save it?").setColor(0x33FFEC))
+              message.channel.send(new discord.MessageEmbed().setTitle("There are changes to the file").setDescription("You might want to save it\nTo force quit: run `:q!`").setColor(0x33FFEC))
             }
             else{
               return collector.stop()
@@ -90,7 +92,9 @@ async function newfx(message,args,bot,data,datadir){
           if(!args[1] && datadir.toLowerCase() == "new file") return message.channel.send(new discord.MessageEmbed().setTitle("Enter a file directory").setColor(0xFF3333))
           if(args[1]) {
             // statement
-            return;
+            data = tempcache[message.author.id]
+            datadir = message.content.slice(args[0].length+1)
+            return sv (message,args,bot,datadir,tempcache);
           }
           if(datadir){
             data = tempcache[message.author.id]
@@ -116,7 +120,7 @@ async function newfx(message,args,bot,data,datadir){
 async function sv(message,args,bot,datadir,tempcache){
   fs.writeFile(`${defaultfile}/${datadir}`,tempcache[message.author.id],(cache,err)=>{
     if(err) return console.log(err)
-    return message.channel.send(new discord.MessageEmbed().setTitle("Saved!").setColor(0x33FFEC))
+    return message.channel.send(new discord.MessageEmbed().setTitle("Saved!").setDescription("Saved texts").addField("Text",`${tempcache[message.author.id]}`).setColor(0x33FFEC))
   })
 }
 
