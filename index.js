@@ -42,6 +42,9 @@ function init() {
     if (resp) console.error(resp);
   });
 
+  //Check token FIRST before laoding an event and possibly logging in to discord
+  let ECHECK = await echeck(bot.config.token)
+  if(ECHECK) process.exit()
   const eventFiles = readdirSync("./system/events");
   console.log(`Loaded ${eventFiles.length} event files `, "log");
   eventFiles.forEach((file) => {
@@ -54,6 +57,15 @@ function init() {
   });
 }
 
-init();
+async function echeck(tokenString){
+  //Simple fix but it works
+  if(tokenString.toLowerCase().includes("enter")) return "---------- You did not enter your bot token here! ----------\nExiting......"
+  try{
+    bot.login(bot.config.token)
+  }
+  catch(e){
+    return "---------- The bot failed to login! ----------\nExiting......."
+  }
+}
 
-bot.login(bot.config.token);
+init();

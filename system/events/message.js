@@ -40,6 +40,17 @@ module.exports = class {
 
 
       //Permission shit goes here
+      /*
+        <---- AS ALWAYS
+              THIS WILL GET REPLACED WITH A NEW PERMISSION PARSING SYSTEM. PROBABLY TODAY OR WHEN I WAKE UP OR WHEN IM MOTIVATED TO DO SO
+
+              BELOW THIS CODE WILL GET REPLACED WITH A PERMISSION PARSING SYSTEM. An execution class will be at ./system/Programs/permParsing.js (class permParsing{})
+
+              ---->
+              const permParsing = new(require('../programs/permParsing.js')) // Lets hope this works
+
+              permParsing.runExec(message,args,bot,cmd)
+      */
           const bot = this.bot
           let perm = cmd.conf.permissions
           let lw = await message.client.fetchApplication().then(app=>app.owner.id)
