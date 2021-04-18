@@ -50,6 +50,7 @@ module.exports = class {
               const permParsing = new(require('../programs/permParsing.js')) // Lets hope this works
 
               permParsing.runExec(message,args,bot,cmd)
+                      ---->
       */
           const bot = this.bot
           let perm = cmd.conf.permissions
