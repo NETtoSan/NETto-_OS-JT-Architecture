@@ -6,7 +6,7 @@ JT Arechitecture is a discord bot for NETSU Labs that supplies functionalities f
 
 It can be use for fun!. Or you can completely steal this code without any issues. Dont worry, many people did this to me
 
-## Contributing
+## setup
 
 1. Clone this repository
 2. Run `npm i` in your terminal
