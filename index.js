@@ -10,6 +10,8 @@ class NETto_OS extends Client {
     this.config = require("./system/config/bot.json");
     this.programs = new Collection();
     this.aliases = new Collection();
+    this.guild = []
+    this.permparse = require("./system/programs/permParsing")
   }
   loadCommand(commandPath, commandName) {
     try {
@@ -28,6 +30,21 @@ class NETto_OS extends Client {
       return false;
     } catch (e) {
       return `Unable to load ${commandName}: ${e}`;
+    }
+  }
+  commandSync(message,args,bot,app){
+    //Pass permParsing
+    if(app.config.enabled == true){
+      if(!bot.guild[message.guild.id] || !bot.guild[message.guild.id].restrictCommand.has(app.help.name)) return message.channel.send(new discord.MessageEmbed().setTitle("This command is disabled by guild!").setDescription("Ask the guild administrator to enable this command").setColor(0xFF3333))
+      try{
+        new this.permparse().check(message,args,bot,app)
+      }
+      catch(err){
+        return message.channel.send(new discord.MessageEmbed().setTitle("Error").setDescription(new String(err)).setColor(0xFF3333))
+      }
+    }
+    else{
+      return message.channel.send(new discord.MessageEmbed().setTitle("This program is disabled!").setDescription("Ask the bot owner to enable this command"))
     }
   }
 }
@@ -61,7 +78,7 @@ async function echeck(tokenString){
   //Simple fix but it works
   if(tokenString.toLowerCase().includes("enter")) return "---------- You did not enter your bot token here! ----------\nExiting......"
   try{
-    bot.login(bot.config.token)
+    await bot.login(bot.config.token)
   }
   catch(e){
     return "---------- The bot failed to login! ----------\nExiting......."
