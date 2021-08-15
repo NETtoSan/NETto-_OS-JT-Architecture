@@ -71,7 +71,7 @@ class NETto_OS extends Client {
 
 const bot = new NETto_OS();
 
-function init() {
+async function init() {
   klaw("./system/executables").on("data", (item) => {
     const pgFile = path.parse(item.path);
     if (!pgFile.ext || pgFile.ext !== ".js") return;
