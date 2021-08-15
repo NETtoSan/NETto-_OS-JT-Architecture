@@ -52,25 +52,10 @@ module.exports = class {
               permParsing.runExec(message,args,bot,cmd)
                       ---->
       */
-          const bot = this.bot
-          let perm = cmd.conf.permissions
-          let lw = await message.client.fetchApplication().then(app=>app.owner.id)
-          //Logic shits
-          if(!perm) return message.channel.send(new discord.MessageEmbed().setTitle("Permission error on JS").setDescription("Check ./system/base and ./system/executables").setColor(0xFF3333))
-          if(perm == "default") {
-              return cmd.run(message,args,bot)
-          }
-          if(perm == "OWNER" && message.author.id == lw) {
-              return cmd.run(message,args,bot)
-          }
-          const uperm = await message.member.permissions.has(perm)
-          console.log(uperm)
-          if(uperm) {
-              if(perm == "OWNER") return message.channel.send(new discord.MessageEmbed().setTitle("Access denied!").setDescription(`This program required role of ${perm}`).setColor(0xFF3333))
-              return cmd.run(message,args,bot)
-          }
-          else return message.channel.send(new discord.MessageEmbed().setTitle("Access denied!").setDescription(`This program required role of ${perm}`))
-
+      /*
+         <---- Replace direct cmd.run Execution with the bot's CommandSync function.
+         bot.commandSync(message,args,this.bot,app)
+      */
     }
     catch(e){
       return message.channel.send(new discord.MessageEmbed().setTitle("oh no").setDescription("Error executing program").addField("Error",`${e}`).setColor(0xFF3333))

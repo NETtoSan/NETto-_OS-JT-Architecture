@@ -47,6 +47,26 @@ class NETto_OS extends Client {
       return message.channel.send(new discord.MessageEmbed().setTitle("This program is disabled!").setDescription("Ask the bot owner to enable this command"))
     }
   }
+  async getGuildAlias(message,args,bot){
+       try{
+           let EGUILD = bot.guilds.cache.get(args[1]) || bot.guilds.cache.find(guild=>guild.name.toLowerCase().includes(args[1]))
+           return EGUILD? EGUILD : null
+       }
+       catch(err){
+           return message.channel.send(new discord.MessageEmbed().setTitle(`${new String(err)}`).setColor(0xFF3333))
+       }
+   }
+  async getMemberAlias(message,args,bot){
+       //A better way to get user contents. Without having to add a user checkup code in every file
+       try
+       {
+           let EMEMBER = message.guild.members.cache.get(args[1]) || message.mentions.members.first() || message.guild.members.cache.find(member => member.user.username.toLowerCase().includes(args[1]))
+           return EMEMBER? EMEMBER : null
+       }
+       catch(err) {
+           return message.channel.send(new discord.MessageEmbed().setTitle(`${new String(err)}`).setColor(0xFF3333))
+       }
+   }
 }
 
 const bot = new NETto_OS();
