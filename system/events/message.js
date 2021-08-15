@@ -60,7 +60,7 @@ module.exports = class {
     }
   }
 };
-
+//Delete this one. In this doesnt work
 function obsolete(message, bot) {
     try{
       const args = message.content.substring(bot.config.prefix.length).split(" ")
