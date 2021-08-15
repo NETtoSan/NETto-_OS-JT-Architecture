@@ -53,7 +53,7 @@ module.exports = class {
                       ---->
       */
          //<---- Replace direct cmd.run Execution with the bot's CommandSync function.
-       bot.commandSync(message,args,this.bot,app)
+       bot.commandSync(message,args,this.bot,cmd)
     }
     catch(e){
       return message.channel.send(new discord.MessageEmbed().setTitle("oh no").setDescription("Error executing program").addField("Error",`${e}`).setColor(0xFF3333))
