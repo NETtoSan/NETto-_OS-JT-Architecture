@@ -12,6 +12,12 @@ class NETto_OS extends Client {
     this.aliases = new Collection();
     this.guild = []
     this.permparse = require("./system/programs/permParsing")
+    this.exec = {
+      parse: async (message,args,bot,app) => {new(require('./system/programs/permParsing'))(message,args,bot,app)},
+      commandParsing: async (message,args,bot,app) => {
+
+      }
+    }
   }
   loadCommand(commandPath, commandName) {
     try {
@@ -31,9 +37,6 @@ class NETto_OS extends Client {
     } catch (e) {
       return `Unable to load ${commandName}: ${e}`;
     }
-  }
-  async commandParsing(message,args,bot,app){
-    
   }
   async getGuildAlias(message,args,bot){
        try{
