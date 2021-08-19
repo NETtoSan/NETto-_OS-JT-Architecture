@@ -5,7 +5,7 @@ module.exports = class {
 
   async run() {
       console.log(`------- STAT -------`)
-      console.log(`Programs: ${this.bot.programs.size}\nCarriedover programs: ${this.bot.carryover.size}`)
+      console.log(`Programs: ${this.bot.programs.size}`)
       console.log(`------- Bot is ready! -------`)
   }
 };

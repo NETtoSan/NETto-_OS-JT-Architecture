@@ -1,19 +1,19 @@
-class Program {
-  constructor(
-    bot,
-    {
+class Command {
+    constructor(client, {
       name = null,
       description = "No description provided.",
       category = "Miscellaneous",
       usage = "No usage provided.",
       enabled = true,
+      guildOnly = true,
       aliases = new Array(),
-      permissions = "No permission provided"
+      permLevel = "User",
+      restrictChannel = "default",
+      ntEquivalent = "NETto!_NT dev"
+    }) {
+      this.client = client;
+      this.conf = { enabled, guildOnly, aliases, permLevel, restrictChannel, ntEquivalent};
+      this.help = { name, description, category, usage };
     }
-  ) {
-    this.bot = bot;
-    this.conf = { enabled, aliases, permissions };
-    this.help = { name, description, category, usage };
   }
-}
-module.exports = Program;
+  module.exports = Command;

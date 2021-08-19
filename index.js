@@ -10,7 +10,6 @@ class NETto_OS extends Client {
     this.config = require("./system/config/bot.json");
     this.programs = new Collection();
     this.aliases = new Collection();
-    this.carryover = new Collection();
     this.guild = []
     this.permparse = require("./system/programs/permParsing")
   }
@@ -33,20 +32,8 @@ class NETto_OS extends Client {
       return `Unable to load ${commandName}: ${e}`;
     }
   }
-  commandSync(message,args,bot,app){
-    //Pass permParsing
-    if(app.config.enabled == true){
-      if(!bot.guild[message.guild.id] || !bot.guild[message.guild.id].restrictCommand.has(app.help.name)) return message.channel.send(new discord.MessageEmbed().setTitle("This command is disabled by guild!").setDescription("Ask the guild administrator to enable this command").setColor(0xFF3333))
-      try{
-        new this.permparse().check(message,args,bot,app)
-      }
-      catch(err){
-        return message.channel.send(new discord.MessageEmbed().setTitle("Error").setDescription(new String(err)).setColor(0xFF3333))
-      }
-    }
-    else{
-      return message.channel.send(new discord.MessageEmbed().setTitle("This program is disabled!").setDescription("Ask the bot owner to enable this command"))
-    }
+  async commandParsing(message,args,bot,app){
+    
   }
   async getGuildAlias(message,args,bot){
        try{
