@@ -10,6 +10,7 @@ class NETto_OS extends Client {
     this.config = require("./system/config/bot.json");
     this.programs = new Collection();
     this.aliases = new Collection();
+    this.carryover = new Collection();
     this.guild = []
     this.permparse = require("./system/programs/permParsing")
   }
