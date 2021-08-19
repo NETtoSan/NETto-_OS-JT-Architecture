@@ -5,7 +5,7 @@ class Command {
       category = "Miscellaneous",
       usage = "No usage provided.",
       enabled = true,
-      guildOnly = true,
+      guildOnly = false,
       aliases = new Array(),
       permLevel = "User",
       restrictChannel = "default",

@@ -28,12 +28,11 @@ module.exports = class {
       return
     }
     try{
-      if(bot.config.exec.channelOnly !== "disabled" && apps.conf.restrictChannel == "default" && message.channel.toLowerCase().includes("bot")){
+      if(apps.conf.restrictChannel == "default" && message.channel.name.toLowerCase().includes("bot")){
         try{
-          if(apps.conf.guildOnly !== true) return bot.exec.parse(message,args,bot,app)
+          if(apps.conf.guildOnly !== true) {console.log("app exec") ;return bot.exec.parse(message,args,bot,apps)}
         }
         catch(err){
-
         }
       }
     }
