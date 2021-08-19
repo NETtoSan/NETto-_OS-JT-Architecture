@@ -9,7 +9,7 @@ module.exports = class {
     if(message.author.bot) return
     let args = message.content.substring(bot.config.prefix.length).split(/ +/g)
     //Mention greetings
-    if(message.content.startsWith(RegExp(`^<@!?${bot.user.id}>( |)`))){
+    if(message.content.match(RegExp(`^<@!?${bot.user.id}>( |)`))){
       /*
       Simple chatbot later
       if(args[1]){
@@ -38,7 +38,7 @@ module.exports = class {
       }
     }
     catch(err){
-      
+
     }
   }
 };
