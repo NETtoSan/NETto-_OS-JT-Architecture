@@ -14,16 +14,16 @@ class text extends Command{
   }
   async run (message,args,bot){
     let owner = await message.client.fetchApplication().then(app=>app.owner.id)
-    if(!args[0]) return message.channel.send(new discord.MessageEmbed().setTitle("This function is currently in development").setDescription("Please come back later!").setColor(0x33FFEC))
-    if(args[0] == "new"){
+    if(!args[1]) return message.channel.send(new discord.MessageEmbed().setTitle("This function is currently in development").setDescription("Please come back later!").setColor(0x33FFEC))
+    if(args[1] == "new"){
       var data = "new text"
       var datadir = "New file"
       newfx(message,args,bot,data,datadir)
     }
-    else if(args[0]){
+    else if(args[1]){
       //cut only dir
-      if(args[0].includes("../") && message.author.id != owner) return message.channel.send(new discord.MessageEmbed().setTitle("no u").setColor(0xFF3333))
-      let titlemsg = message.content.slice(6)
+      if(args[1].includes("../") && message.author.id != owner) return message.channel.send(new discord.MessageEmbed().setTitle("no u").setColor(0xFF3333))
+      let titlemsg = message.content.slice(args[0].length+2)
       let fiS = fs.readFile(`${defaultfile}/${titlemsg}`,"utf8",(err,data)=>{
         if(err) return message.channel.send(new discord.MessageEmbed().setTitle(`${titlemsg} doesnt exist`).setDescription("Please try again").setColor(0xFF3333))
         datadir = titlemsg

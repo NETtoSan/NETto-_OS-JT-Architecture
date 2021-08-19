@@ -13,7 +13,7 @@ class NETto_OS extends Client {
     this.guild = []
     this.permparse = require("./system/programs/permParsing")
     this.exec = {
-      parse: async (message,args,bot,app) => {new(require('./system/programs/permParsing'))(message,args,bot,app)},
+      parse: async (message,args,bot,app) => {console.log("did parse work");new(require('./system/programs/permParsing'))().check(message,args,bot,app)},
       commandParsing: async (message,args,bot,app) => {
 
       }

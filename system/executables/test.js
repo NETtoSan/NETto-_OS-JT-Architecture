@@ -14,7 +14,7 @@ class test extends Command {
   async run(message, args, bot) {
     return message.channel.send(
       new discord.MessageEmbed()
-        .setTitle(this.bot.user.username)
+        .setTitle(bot.user.username)
         .setDescription("This bot is running on JT architecture!")
         .setColor(0x33ffec)
     );

@@ -11,7 +11,7 @@ class help extends Command {
     });
   }
   async run(message, args, bot) {
-    if (!args[0]) {
+    if (!args[1]) {
       const progS = bot.programs.map((program) => program.help.name);
       const sysS = bot.programs.map((program) => program.help.category);
 
@@ -36,8 +36,8 @@ class help extends Command {
         embed.setFooter("Syntaxes: [] = String OR optional options\n<> = Required subcommand\n< / > = Multiple subcommand choices\n<condition? > = If this subcommand, then...")
         return message.channel.send(embed)
     } else {
-      let cmd = args[0];
-      if (this.bot.programs.has(cmd)) {
+      let cmd = args[1];
+      if (bot.programs.has(cmd)) {
         cmd = this.bot.programs.get(cmd);
         message.channel.send(
           new discord.MessageEmbed()
