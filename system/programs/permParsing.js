@@ -15,7 +15,6 @@ class permParsing{
             return message.channel.send(new discord.MessageEmbed().setTitle("No permission!").setDescription(`This command is restricted to ${app.config.permissions}`).setColor(0xFF3333))
           break
           case "pass":
-          console.log("pass")
             return app.run(message,args,bot)
           break
         }
@@ -24,11 +23,9 @@ class permParsing{
     await esfx()
   }
   async permparse(message,args,bot,app){
-    console.log("WORK SHIT")
     //Check NETto!_NT dev variations
     if(app.conf.ntEquivalent !== "NETto!_NT dev") return message.channel.send(new discord.MessageEmbed().setTitle("This is NETto!_NT 8.0 command").setDescription("Wait until NETto writes a command for cross-javascript capable bot").setColor(0xFF3333))
     if(app.conf.permLevel){
-      console.log("hmmm")
       let EPERM = app.conf.permLevel
       if(EPERM.toLowerCase().includes("user") || EPERM.toLowerCase().includes("default")) return "pass"
       if(EPERM.toLowerCase() == "moderators"){
