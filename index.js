@@ -2,7 +2,7 @@ const { Client, Collection } = require("discord.js");
 const klaw = require("klaw");
 const path = require("path");
 const { readdirSync } = require("fs");
-
+const snipeCommand = require('./system/programs/snipe')
 class NETto_OS extends Client {
   constructor(options) {
     super(options);
@@ -12,6 +12,7 @@ class NETto_OS extends Client {
     this.aliases = new Collection();
     this.guild = []
     this.permparse = require("./system/programs/permParsing")
+    this.snipe = new snipeCommand()
     this.exec = {
       parse: async (message,args,bot,app) => {console.log("did parse work");new(require('./system/programs/permParsing'))().check(message,args,bot,app)},
       commandParsing: async (message,args,bot,app) => {
