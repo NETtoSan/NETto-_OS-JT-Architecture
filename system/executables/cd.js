@@ -12,14 +12,14 @@ class cd extends Command {
     });
   }
   async run(message, args, bot) {
-    if (!args[0])
+    if (!args[1])
       return message.channel.send(
         new discord.MessageEmbed()
           .setTitle("No directory")
           .setDescription("Please enter a file directory\nExamples: cd ./")
           .setColor(0xff3333)
       );
-    const dir = message.content.slice("4");
+    const dir = message.content.slice(args[0].length+2);
     const file = fs.readdirSync(dir);
     const emb = new discord.MessageEmbed()
       .setTitle(dir)

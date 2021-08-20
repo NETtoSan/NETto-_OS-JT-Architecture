@@ -6,13 +6,13 @@ class anime extends Command {
     super(bot, {
       name: "anime",
       description: "weeb candyland",
-      aliases: ["weeb"],
+      aliases: ["weeb","owo","uwu"],
       usage: "weeb [nsfw]",
       category: "Fun",
     });
   }
   async run(message, args, bot) {
-    if (!args[0]) {
+    if (!args[1]) {
       try {
         function getRandomInt(max) {
           return Math.floor(Math.random() * Math.floor(max));
@@ -43,7 +43,7 @@ class anime extends Command {
         );
       }
     }
-    if (args[0] == "nsfw") {
+    if (args[1] == "nsfw") {
       try {
         //message.channel.send(new Discord.MessageEmbed().setTitle("WARNING!").setDescription("NSFW filter is off!\nNETto!_OS will not be responsible for any damages and moderators cringeness").setColor(0xFF3333))
         function getRandomInt(max) {
