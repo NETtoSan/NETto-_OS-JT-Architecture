@@ -1,8 +1,12 @@
 const { Client, Collection } = require("discord.js");
 const klaw = require("klaw");
 const path = require("path");
+const chalk = require('chalk')
 const { readdirSync } = require("fs");
 const snipeCommand = require('./system/programs/snipe')
+
+//Fuse this in i dont know... config file maybe
+const RECOGNIZABLE_TYPE = ["LOADCMD","LOADEVT","ESYS","ECMD","ECRTCL"]
 class NETto_OS extends Client {
   constructor(options) {
     super(options);
@@ -25,7 +29,7 @@ class NETto_OS extends Client {
       const props = new (require(`${commandPath}${path.sep}${commandName}`))(
         this
       );
-      console.log(`Loading command ${props.help.name}`, "log");
+      this.consoleLogging(["LOADCMD",`${props.help.name}`])
       props.conf.location = commandPath;
       if (props.init) {
         props.init(this);
@@ -59,6 +63,11 @@ class NETto_OS extends Client {
            return message.channel.send(new discord.MessageEmbed().setTitle(`${new String(err)}`).setColor(0xFF3333))
        }
    }
+  consoleLogging(data){
+    let HEADER = RECOGNIZABLE_TYPE.find(TYPE => TYPE == data[0]) ? data[0] : "UNKNOWN"
+    let CONTEXT = data[1] ? data[1] : "UNKNOWN"
+    console.log(`${chalk.bgCyan(HEADER)} ${CONTEXT}`)
+  }
 }
 
 const bot = new NETto_OS();
@@ -75,10 +84,10 @@ async function init() {
   let ECHECK = await echeck(bot.config.token)
   if(ECHECK) process.exit()
   const eventFiles = readdirSync("./system/events");
-  console.log(`Loaded ${eventFiles.length} event files `, "log");
+  bot.consoleLogging(["LOADEVT",`${eventFiles.length}`])
   eventFiles.forEach((file) => {
     const eventName = file.split(".")[0];
-    console.log(`Loading event ${eventName}`);
+    bot.consoleLogging([`LOADEVT`,`${eventName}`]);
     const evt = new (require(`./system/events/${eventName}`))(bot);
 
     bot.on(eventName, (...args) => evt.run(...args));
