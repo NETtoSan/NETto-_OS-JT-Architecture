@@ -33,7 +33,7 @@ class help extends Command {
         }
 
         embed.setColor(0x33FFEC)
-        embed.setFooter("Syntaxes: [] = String OR optional options\n<> = Required subcommand\n< / > = Multiple subcommand choices\n<condition? > = If this subcommand, then...")
+        embed.setFooter("Syntaxes:\n<> Required\n[] Optional\n</> Multiple choices")
         return message.channel.send(embed)
     } else {
       let cmd = args[1];
