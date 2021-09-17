@@ -28,10 +28,9 @@ module.exports = class {
       return
     }
     try{
-      console.log("brrrrr")
       if(apps.conf.restrictChannel == "default" && message.channel.name.toLowerCase().includes("bot")){
         try{
-          if(apps.conf.guildOnly !== true) {console.log("app exec") ;return bot.exec.parse(message,args,bot,apps)}
+          if(apps.conf.guildOnly !== true) {return bot.exec.parse(message,args,bot,apps)}
         }
         catch(err){
           console.log(err)
