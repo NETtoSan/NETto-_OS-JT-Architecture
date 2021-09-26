@@ -17,7 +17,7 @@ module.exports = class {
             return //chatbot code here
       }
       */
-      return message.channel.send(new discord.MessageEmbed().setTitle(`${bot.user.username}`).setDescription("A NETto!_NT Development project discord bot\nGet the bot source code [here!](https://github.com/NETtoSan/NETto-_OS-JT-Architecture)").setColor(0x33FFEC))
+      return message.channel.send(new discord.MessageEmbed().setTitle(`${bot.user.username}`).setDescription("A NETto!_NT Development project discord bot\nPrefix is @\nGet the bot source code [here!](https://github.com/NETtoSan/NETto-_OS-JT-Architecture)".replace("@",bot.config.prefix)).setColor(0x33FFEC))
     }
     if(!message.content.startsWith(PREFIX)) return
     if(message.channel.type == "dm") return message.channel.send("You cannot use this bot in DMs!")
