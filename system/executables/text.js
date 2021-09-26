@@ -14,7 +14,7 @@ class text extends Command{
   }
   async run (message,args,bot){
     let owner = await message.client.fetchApplication().then(app=>app.owner.id)
-    if(!args[1]) return message.channel.send(new discord.MessageEmbed().setTitle("This function is currently in development").setDescription("Please come back later!").setColor(0x33FFEC))
+    if(!args[1]) return message.channel.send(new discord.MessageEmbed().setTitle("This function is currently in development").setDescription(`Commands:\n${bot.config.prefix}text new\n${bot.config.prefix}text *<filename>*`).setColor(0x33FFEC))
     if(args[1] == "new"){
       var data = "new text"
       var datadir = "New file"
